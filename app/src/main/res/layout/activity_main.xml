@@ -1,94 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0A0A"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#0D0D0D">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ATLAS OPTIMIZER"
+        android:textColor="#00E676"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HyperOS 3 / Android 16"
+        android:textColor="#BDBDBD"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btnOptimize"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="OPTIMIZASYONU BASLAT"
+        android:backgroundTint="#00E676"
+        android:textColor="#0D0D0D"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:elevation="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ATLAS OPTIMIZER"
-            android:textColor="#00E676"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="HyperOS 3 / Android 16"
-            android:textColor="#808080"
-            android:textSize="14sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"/>
-
-        <com.google.android.material.card.MaterialCardView
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1A1A1A"
+        android:padding="12dp"
+        android:elevation="4dp">
+        
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="#141414"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="24dp">
-
-            <LinearLayout
+            android:layout_height="match_parent">
+            
+            <TextView
+                android:id="@+id/txtLog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <Button
-                    android:id="@+id/btnOptimize"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="OPTIMIZASYONU BASLAT"
-                    android:backgroundTint="#00E676"
-                    android:textColor="#0A0A0A"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="16dp" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:indeterminate="true"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="#141414"
-            app:cardElevation="4dp">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/txtLog"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="Sistem hazır..."
-                    android:textColor="#00E676"
-                    android:textSize="13sp" />
-            </ScrollView>
-        </com.google.android.material.card.MaterialCardView>
+                android:fontFamily="monospace"
+                android:text="Log bekliyor..."
+                android:textColor="#00E676"
+                android:textSize="12sp" />
+        </ScrollView>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

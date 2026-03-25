@@ -2,9 +2,7 @@ package com.atlas.optimizer
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,16 +13,13 @@ import java.io.InputStreamReader
 class MainActivity : AppCompatActivity() {
 
     private lateinit var txtLog: TextView
-    private lateinit var btnOptimize: Button
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         txtLog = findViewById(R.id.txtLog)
-        btnOptimize = findViewById(R.id.btnOptimize)
-        progressBar = findViewById(R.id.progressBar)
+        val btnOptimize = findViewById<Button>(R.id.btnOptimize)
 
         btnOptimize.setOnClickListener {
             if (checkShizukuPermission()) {
@@ -58,10 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun executeOptimizationScript() {
-        btnOptimize.isEnabled = false
-        progressBar.visibility = View.VISIBLE
-        progressBar.progress = 0
-        txtLog.text = "Optimizasyon başlatılıyor..."
+        appendLog("\n>>> Optimizasyon Baslatiliyor...")
         
         try {
             // Assets icindeki scripti oku
@@ -91,8 +83,6 @@ class MainActivity : AppCompatActivity() {
                 
                 val exitCode = process.waitFor()
                 runOnUiThread {
-                    progressBar.visibility = View.GONE
-                    btnOptimize.isEnabled = true
                     appendLog("\n>>> Islem Tamamlandi. Exit Code: $exitCode")
                     Toast.makeText(this, "Optimizasyon Tamamlandi!", Toast.LENGTH_LONG).show()
                 }
