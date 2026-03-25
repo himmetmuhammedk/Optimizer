@@ -8,10 +8,10 @@
 # LOG=/storage/emulated/0/Download/pubg_optimize_log.txt
 # > "$LOG"
 
-ui()   { echo "$1"; }
-log()  { echo "$1"; }
-ok()   { echo "  [✓] $1"; }
-skip() { echo "  [~] $1"; }
+ui()   { echo "$1"; sleep 0.5; }
+log()  { echo "$1"; sleep 0.05; }
+ok()   { echo "  [✓] $1"; sleep 0.05; }
+skip() { echo "  [~] $1"; sleep 0.05; }
 
 ui ""
 ui "╔══════════════════════════════════════════╗"
@@ -541,7 +541,13 @@ cmd netpolicy set restrict-background false com.tencent.ig 2>/dev/null && ok "PU
 cmd connectivity set-avoid-unvalidated 0 2>/dev/null && ok "Ağ önceliği kısıtı: kaldırıldı"
 am set-inactive com.tencent.ig false 2>/dev/null && ok "PUBG: inaktif değil"                             || skip "set-inactive"
 log ""
+log "[ATLAS] Tüm optimizasyonlar başarıyla uygulandı"
+log ""
 
+ui "  --------------------------------"
+ui "  ✨ BAŞARILI! ✅"
+ui "  --------------------------------"
+ui ""
 
 # ─────────────────────────────────────────────
 # 14. PUBG Başlatma & PID
