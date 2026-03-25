@@ -60,7 +60,14 @@ class MainActivity : AppCompatActivity() {
             val scriptContent = assets.open("optimize.sh").bufferedReader().use { it.readText() }
             
             // Shizuku ile shell uzerinden yurut
-            val process = Shizuku.newProcess(arrayOf("sh", "-c", scriptContent), null, null)
+            val process = try {
+                val method = Shizuku::class.java.getDeclaredMethod("newProcess", Array<String>::class.java, Array<String>::class.java, String::class.java)
+                method.isAccessible = true
+                method.invoke(null, arrayOf("sh", "-c", scriptContent), null, null) as Process
+            } catch (e: Exception) {
+                appendLog("Shizuku newProcess hatasi: ${e.message}")
+                Runtime.getRuntime().exec(arrayOf("sh", "-c", scriptContent))
+            }
             
             Thread {
                 val reader = BufferedReader(InputStreamReader(process.inputStream))
