@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             txtLog.append("\n$text")
             
-            // Scroll to bottom safely
+            // Scroll to bottom using the parent ScrollView
             val scrollView = txtLog.parent.parent as? android.widget.ScrollView
             scrollView?.post {
                 scrollView.fullScroll(android.view.View.FOCUS_DOWN)

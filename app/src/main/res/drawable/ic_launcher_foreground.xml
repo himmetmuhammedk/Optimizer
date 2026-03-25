@@ -4,28 +4,7 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Rocket Body -->
     <path
-        android:fillColor="#E0E0E0"
-        android:pathData="M54,10 C40,10 30,30 30,60 L30,80 L54,95 L78,80 L78,60 C78,30 68,10 54,10 Z" />
-    <!-- Rocket Nose -->
-    <path
-        android:fillColor="#D32F2F"
-        android:pathData="M54,10 L65,30 L43,30 Z" />
-    <!-- Rocket Fin Left -->
-    <path
-        android:fillColor="#BDBDBD"
-        android:pathData="M30,60 L15,85 L30,80 Z" />
-    <!-- Rocket Fin Right -->
-    <path
-        android:fillColor="#BDBDBD"
-        android:pathData="M78,60 L93,85 L78,80 Z" />
-    <!-- Rocket Flame -->
-    <path
-        android:fillColor="#FFC107"
-        android:pathData="M45,95 L54,115 L63,95 Z" />
-    <!-- Rocket Letter C -->
-    <path
-        android:fillColor="#1976D2"
-        android:pathData="M54,40 A10,10 0 1,0 54,60 A10,10 0 1,0 54,40 Z M54,45 A5,5 0 1,1 54,55 A5,5 0 1,1 54,45 Z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,30h48v48h-48z" />
 </vector>
