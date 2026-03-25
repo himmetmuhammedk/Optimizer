@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -20,6 +20,11 @@ jobs:
         java-version: '21'
         distribution: 'zulu'
         cache: gradle
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y zlib1g lib32z1
 
     - name: Fix line endings and permissions for gradlew
       run: |
