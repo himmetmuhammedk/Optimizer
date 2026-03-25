@@ -1,17 +1,13 @@
 package com.atlas.optimizer
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import rikka.shizuku.Shizuku
 import java.io.BufferedReader
-import java.io.File
 import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
@@ -26,24 +22,13 @@ class MainActivity : AppCompatActivity() {
         val btnOptimize = findViewById<Button>(R.id.btnOptimize)
 
         btnOptimize.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1002)
-            } else if (checkShizukuPermission()) {
+            if (checkShizukuPermission()) {
                 executeOptimizationScript()
             }
         }
 
         Shizuku.addRequestPermissionResultListener { requestCode, grantResult ->
             if (requestCode == 1001 && grantResult == PackageManager.PERMISSION_GRANTED) {
-                executeOptimizationScript()
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1002 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (checkShizukuPermission()) {
                 executeOptimizationScript()
             }
         }
@@ -99,29 +84,12 @@ class MainActivity : AppCompatActivity() {
                 val exitCode = process.waitFor()
                 runOnUiThread {
                     appendLog("\n>>> Islem Tamamlandi. Exit Code: $exitCode")
-                    readLogFile()
                     Toast.makeText(this, "Optimizasyon Tamamlandi!", Toast.LENGTH_LONG).show()
                 }
             }.start()
 
         } catch (e: Exception) {
             appendLog("Hata: ${e.message}")
-        }
-    }
-
-    private fun readLogFile() {
-        val logFile = File("/storage/emulated/0/Download/pubg_optimize_log.txt")
-        if (logFile.exists()) {
-            try {
-                val content = logFile.readText()
-                runOnUiThread {
-                    txtLog.text = content
-                }
-            } catch (e: Exception) {
-                appendLog("Log dosyasi okunamadi: ${e.message}")
-            }
-        } else {
-            appendLog("Log dosyasi bulunamadi: ${logFile.absolutePath}")
         }
     }
 
