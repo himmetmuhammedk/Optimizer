@@ -5,13 +5,13 @@
 # Mod    : Brevent + Shizuku (root gerektirmez)
 # Hedef  : com.tencent.ig
 
-LOG=/storage/emulated/0/Download/pubg_optimize_log.txt
-> "$LOG"
+# LOG=/storage/emulated/0/Download/pubg_optimize_log.txt
+# > "$LOG"
 
 ui()   { echo "$1"; }
-log()  { echo "$1" >> "$LOG"; }
-ok()   { echo "  [✓] $1" >> "$LOG"; }
-skip() { echo "  [~] $1" >> "$LOG"; }
+log()  { echo "$1"; }
+ok()   { echo "  [✓] $1"; }
+skip() { echo "  [~] $1"; }
 
 ui ""
 ui "╔══════════════════════════════════════════╗"
@@ -639,8 +639,6 @@ fi
 
 ui "╔══════════════════════════════════════════╗"
 ui "║   Optimizasyon Tamamlandı! — by ATLAS    ║"
-ui "║   /storage/emulated/0/Download/          ║"
-ui "║   pubg_optimize_log.txt                  ║"
 ui "╚══════════════════════════════════════════╝"
 ui ""
 
