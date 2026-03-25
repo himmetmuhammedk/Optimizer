@@ -2,7 +2,9 @@ package com.atlas.optimizer
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +15,16 @@ import java.io.InputStreamReader
 class MainActivity : AppCompatActivity() {
 
     private lateinit var txtLog: TextView
+    private lateinit var btnOptimize: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         txtLog = findViewById(R.id.txtLog)
-        val btnOptimize = findViewById<Button>(R.id.btnOptimize)
+        btnOptimize = findViewById(R.id.btnOptimize)
+        progressBar = findViewById(R.id.progressBar)
 
         btnOptimize.setOnClickListener {
             if (checkShizukuPermission()) {
@@ -53,7 +58,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun executeOptimizationScript() {
-        appendLog("\n>>> Optimizasyon Baslatiliyor...")
+        btnOptimize.isEnabled = false
+        progressBar.visibility = View.VISIBLE
+        progressBar.progress = 0
+        txtLog.text = "Optimizasyon başlatılıyor..."
         
         try {
             // Assets icindeki scripti oku
@@ -83,6 +91,8 @@ class MainActivity : AppCompatActivity() {
                 
                 val exitCode = process.waitFor()
                 runOnUiThread {
+                    progressBar.visibility = View.GONE
+                    btnOptimize.isEnabled = true
                     appendLog("\n>>> Islem Tamamlandi. Exit Code: $exitCode")
                     Toast.makeText(this, "Optimizasyon Tamamlandi!", Toast.LENGTH_LONG).show()
                 }
@@ -99,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             txtLog.append("\n$text")
             
-            // Scroll to bottom using the parent ScrollView
+            // Scroll to bottom safely
             val scrollView = txtLog.parent.parent as? android.widget.ScrollView
             scrollView?.post {
                 scrollView.fullScroll(android.view.View.FOCUS_DOWN)
